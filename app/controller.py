@@ -30,7 +30,7 @@ def main():
                     if choice is None: #Bad input
                         views.generic_msg("Please enter a number that corresponds \
                                            to a stated option")
-                    elif choice == 7: #Exit
+                    elif choice == 8: #Exit
                         break
                     elif choice == 1: #View Balance & Positions
                         positions_sub_menu(pk)
@@ -47,19 +47,27 @@ def main():
                             views.generic_msg("The Ticker Symbol entered does not exist")
                         else:
                             views.stock_price(ticker, quote)
-                    elif choice == 4: #Buy stock
+                    elif choice == 4: #Look up ticker from Co. name
+                        co_name = views.get_input("Please enter Company Name")
+                        companies = util.get_ticker(co_name )
+                        if not companies: 
+                            views.generic_msg("No matches for input Company Name")
+                        else:
+                            for co in companies:
+                                views.show_companies(co) 
+                    elif choice == 5: #Buy stock
                         ticker = views.get_input("Please enter a Ticker Symbol")
                         shares_buy = views.get_input("Please enter the number of shares to buy")
                         buy_txn = Account(pk=pk)
                         buy_txn.buy(ticker, shares_buy)
                         views.generic_msg("Buy transaction complete")                      
-                    elif choice == 5: #Sell stock
+                    elif choice == 6: #Sell stock
                         ticker = views.get_input("Please enter a Ticker Symbol")
                         shares_sell = views.get_input("Please enter the number of shares to sell")
                         sell_txn = Account(pk=pk)
                         sell_txn.sell(ticker, shares_sell)
                         views.generic_msg("Sell transaction complete")  
-                    elif choice == 6: #View Trade History
+                    elif choice == 7: #View Trade History
                         trades_sub_menu(pk)
         
 def positions_sub_menu(pk):

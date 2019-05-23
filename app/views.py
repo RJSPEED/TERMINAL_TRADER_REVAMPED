@@ -1,6 +1,7 @@
 
 from datetime import datetime, timedelta
 from pprint import pprint
+import os
 
 def get_input(param):
     print()
@@ -13,6 +14,7 @@ def generic_msg(param):
     print()
 
 def stock_price(ticker, quote):
+    #os.system('clear')
     print()
     print("Current price for Ticker Symbol: {} = ${}".format(ticker, quote))
     print()
@@ -27,6 +29,10 @@ def show_trades(trade):
            format((datetime.fromtimestamp(trade.time) - \
                    timedelta(hours=2)).strftime('%Y-%m-%d %H:%M:%S'), \
                    trade.ticker, trade.volume, trade.price))
+
+def show_companies(co):
+    print()
+    print("Company Name: {}, Ticker Symbol: {}, Exchange: {}".format(co["Name"], co["Symbol"], co["Exchange"]))
 
 def welcome_menu():
     print()
@@ -52,13 +58,15 @@ def main_menu():
     print()
     print("3. Lookup Stock Price")
     print()
-    print("4. Buy Stock")
+    print("4. Lookup Ticker Symbol")
     print()
-    print("5. Sell Stock")
+    print("5. Buy Stock")
     print()
-    print("6. View Trade History")
+    print("6. Sell Stock")
     print()
-    print("7. Exit")
+    print("7. View Trade History")
+    print()
+    print("8. Exit")
     print()
 
     selection = input().strip()

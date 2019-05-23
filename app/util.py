@@ -33,6 +33,14 @@ def get_price(ticker):
     if len(stock_data) > 1:
         return stock_data['LastPrice']
 
+def get_ticker(co_name): 
+    url_str = "http://dev.markitondemand.com/MODApis/Api/v2/Lookup/json?input=" + co_name
+    stock = requests.get(url_str)
+    stock_data = json.loads(stock.text)
+    #Response for invalid Company name is empty dict
+    if len(stock_data) > 0:
+        return stock_data
+
     #if ticker in FAKE_PRICES.keys():
     #    return FAKE_PRICES[ticker]
     
